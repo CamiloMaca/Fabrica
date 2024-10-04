@@ -44,4 +44,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function transaccions()
+    {
+        return $this->hasMany(Transaccion::class);
+    }
 }
