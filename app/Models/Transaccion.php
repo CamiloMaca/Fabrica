@@ -14,7 +14,8 @@ class Transaccion extends Model
         'tipo_transaccion_id',
         'fecha',
         'monto',
-        'motivo'
+        'motivo',
+        'total'
     ];
 
     public function user()

@@ -24,11 +24,41 @@ class TransaccionController extends Controller
             'motivo' => 'required|string'
         ]);
 
-        if($request->monto<0){
-            return response()->json(['message' => 'El valor del monto es negativo'], 400);
-        }
-        $transaccion = Transaccion::create($request->all());
+        $tipoTransaccion=$request->tipo_transaccion_id;
+        $monto=$request->monto;
+        $user_id=$request->user_id;
 
+        //totalMonto del usuario
+        $totalMonto = Transaccion::where('user_id', $user_id)->latest()->value('total');
+
+        //primer transaccion
+        if(is_null($totalMonto)){
+            $totalMonto=0;
+        }
+
+        //ingresos y egresos
+        if($monto>0){
+
+            if($tipoTransaccion==1){
+                $totalMonto+=$monto;
+            }
+            else if($tipoTransaccion==2){
+                if($monto<=$totalMonto){
+                    $totalMonto-=$monto;
+                }else{
+                    return response()->json(['message' => 'No tienes suficiente saldo'], 400);
+                }
+            }
+
+        }else{
+            return response()->json(['message' => 'el valor de la transaccion debe ser positivo'], 400);
+        }
+
+        //agregar total y fecha a la request al array
+        $request->merge(['total'=>$totalMonto]);
+        
+        $transaccion = Transaccion::create($request->all());
+        
         return response()->json($transaccion);
     }
 

@@ -29,6 +29,7 @@ return new class extends Migration
             $table->date('fecha');
             $table->integer('monto');
             $table->string('motivo');
+            $table->integer('total');
 
             $table->timestamps();
         });
