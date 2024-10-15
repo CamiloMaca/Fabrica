@@ -11,6 +11,7 @@ class Transaccion extends Model
     use HasFactory;
 
     protected $fillable=[
+        'user_id',
         'tipo_transaccion_id',
         'fecha',
         'monto',
@@ -18,6 +19,7 @@ class Transaccion extends Model
     ];
 
     protected $allowIncluded = [
+        'user',
         'tipoTransaccion'
     ];
 

@@ -20,9 +20,10 @@ class DatabaseSeeder extends Seeder
             TipoTransaccionSeeder::class
         ]);
         
-/*         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]); */
+        User::factory()->create([
+            'name' => 'Test User1',
+            'email' => 'test1@example.com',
+            'password' => '123456'
+        ]);
     }
 }
