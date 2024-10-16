@@ -15,10 +15,9 @@ Route::group([
 ], function ($router) {
 
     Route::apiresource('transaccions', TransaccionController::class);
-
+    Route::resource('TipoTransaccions', TipoTransaccionController::class);
 });
 
-Route::resource('TipoTransaccions', TipoTransaccionController::class);
 
 //jwt
 Route::group([
